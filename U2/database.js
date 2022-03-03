@@ -3,7 +3,7 @@ let database = [
    {
         id: 0,
         name: "Hummus",
-        region: "Middle East",
+        region: "Kishe israel",
         country: "Palestine",
         main: "Chickpeas",
         sides: "Bread or Olives"

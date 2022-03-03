@@ -178,17 +178,17 @@ function onFilterByRegionSubmit(event) {
 function onFilterBycountrySubmit(event) {
     event.preventDefault();
     // What country?
-    let country = document.getElementById("filter-country").value;
+    let country = document.getElementById("filter-from").value;
     // Get the dishes by region
     let dishes = getDishesByCountry(database, country);
     // Re-render them
-    renderdishes(dishes);
+    renderDishes(dishes);
 }
 
 function onShowAllClick() {
     document.getElementById("filter-region").value = "";
-    document.getElementById("filter-country").value = "";
-    renderdishes(database);
+    document.getElementById("filter-from").value = "";
+    renderDishes(database);
 }
 
 function setFilterfoodHandlers() {
