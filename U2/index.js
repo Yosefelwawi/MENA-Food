@@ -75,12 +75,13 @@ function getAvercountryfoodcountry(dishes) {
 }
 
 // Renders a food object into a HTML element
-function renderfood(food) {
+function renderFood(food, id) {
     let div = document.createElement("div");
     div.classList.add("food");
     div.id = food.id;
 
     div.innerHTML = `
+         <div>${id}</div>
         <div>${food.name}</div>
         <div>${food.region}</div>
         <div>${food.country}</div>
@@ -98,8 +99,8 @@ function renderDishes(dishes) {
     dishesElement.innerHTML = "";
 
     // Go through all dishes and insert their HTML
-    for (let food of dishes) {
-        let foodElement = renderfood(food);
+    for (let i = 0; i < dishes.length; i++) {
+        let foodElement = renderFood(dishes[i], i + 1);
         dishesElement.appendChild(foodElement);
     }
     // Add remove-handlers for our dishes
