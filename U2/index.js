@@ -83,8 +83,8 @@ function renderFood(food, id) {
     div.innerHTML = `
          <div>${id}</div>
         <div>${food.name}</div>
-        <div>${food.region}</div>
         <div>${food.country}</div>
+        <div>${food.region}</div>
         <div>${food.main}</div>
         <div>${food.sides}</div>
         <button type="button">Remove</button>

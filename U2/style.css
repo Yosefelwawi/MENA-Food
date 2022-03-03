@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     max-width: 1000px;
     font-family: Courier;
+
   }
   
   h1 {
@@ -57,5 +58,5 @@ body {
   }
   
   .food:nth-child(odd) {
-    background: #fffff0;
+    background: salmon;
   }
