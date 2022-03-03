@@ -108,7 +108,7 @@ function renderDishes(dishes) {
 
 // When <form id="add-food"> is submitted
 function onAddDishesSubmit(event) {
-    // Prevent the form from sending us to a new pcountry
+    // Prevent the form from sending us to a new page
     event.preventDefault();
 
     let name = document.getElementById("name").value;
@@ -116,6 +116,12 @@ function onAddDishesSubmit(event) {
     let country = document.getElementById("country").value;
     let main = document.getElementById("main-ingredient").value;
     let sides = document.getElementById("sides").value;
+
+    if (name == "" || region == "" || country == "" || main == "" || sides == "" )  {
+        alert ("WTF are u retarded, fill in the fields");
+        console.log ("hej!")
+        return;
+    };
 
     let food = createNewfood(name, region, country, main, sides);
 
@@ -149,9 +155,13 @@ function onRemoveFoodClick(event) {
     let button = event.target;
     let id = button.parentElement.id;
     // Uses the global variable `database`
-    removeFoodById(database, id);
-    // Re-render (without the newly deleted food)
-    renderDishes(database);
+    if (confirm ("Are you sure you want to remove this field?")){
+        removeFoodById(database, id);
+        // Re-render (without the newly deleted food)
+        renderDishes(database);
+    }
+
+
 }
 
 // Add "click" event handler to all remove-buttons
