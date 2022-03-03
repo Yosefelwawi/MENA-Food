@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENA-Food</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <h1>Middle Eastern/North African Food</h1>
+
+    <form id="add-food">
+        <input id="name" type="text" placeholder="Name">
+        <input id="country" type="number" placeholder="Country">
+        <input id="region" type="text" placeholder="Region">
+        <input id="main-ingredient" type="number" placeholder="Main ingredient">
+        <input id="sides" type="number" placeholder="Side dish">
+        <button>Add</button>
+    </form>
+
+    <div id="filters">
+        <form id="filter-by-region">
+            <input id="filter-region" type="text" placeholder="Filter by region">
+            <button>Filter</button>
+        </form>
+
+        <form id="filter-by-country">
+            <input id="filter-from" type="number" placeholder="Filter by country">
+            <button>Filter</button>
+        </form>
+
+        <button id="display-all" type="button">
+            Show all
+        </button>
+    </div>
+
+    <div id="headers">
+        <div>Name</div>
+        <div>Country</div>
+        <div>Region</div>
+        <div>Main ingredient</div>
+        <div>Side dish</div>
+        <div>Actions</div>
+    </div>
+
+    <div id="dishes"></div>
+
+    <script src="database.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>

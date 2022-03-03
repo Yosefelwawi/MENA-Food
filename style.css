@@ -1,0 +1,61 @@
+body {
+    margin: 0 auto;
+    max-width: 1000px;
+    font-family: Courier;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #add-food{
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px 60px;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #aaa;
+  }
+  
+  #filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 15px;
+    gap: 15px;
+  }
+  
+  #filter-by-region,
+  #filter-by-country {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  
+  #headers {
+    padding: 10px 20px;
+    border-bottom: 1px solid #aaa;
+    background: beige;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  #dishes {
+    background: beige;
+    padding: 10px;
+  }
+  
+  .food {
+    padding: 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .food div {
+    /* Center vertically */
+    display: flex;
+    align-items: center;
+  }
+  
+  .food:nth-child(odd) {
+    background: #fffff0;
+  }
