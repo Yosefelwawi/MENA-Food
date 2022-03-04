@@ -1,7 +1,7 @@
 "use strict";
 let ids = 0;
-// Creates a new food object and then returns it
-function createNewfood(name, region, country, main, sides) {
+// Skapar ett nytt matobjekt och dörefter returnerar variabeln
+function createNewFood(name, region, country, main, sides) {
     let food = {
         id: ids++,
         name: name,
@@ -14,67 +14,52 @@ function createNewfood(name, region, country, main, sides) {
     return food;
 }
 
-// Adds a new food to our database
+// Adderar in en ny maträtt i vår databas
 function addFoodToDatabase(database, food) {
     database.push(food);
 }
 
-// Removes a food based on its name from our database
+// Tar bort en maträtt baserat på dess namn från vår databas
 function removeFoodById(dishes, id) {
     for (let i = 0; i < dishes.length; i++) {
-        // This is the current food of our loop
+        // Här asignerar vi ett matobjekt till vår "food" variabel, beroende på loop-index värdet 
         let food = dishes[i];
-        // Check if this dishes name is the same a the name
-        // that the function received
+
         if (food.id == id) {
-            // If so, remove the food from the array
+            // Detta "if" påstående kontrollerar ifall vi verkligen har ett matobjekt "id" som är == det givna "id" argument
             dishes.splice(i, 1);
             return;
         }
     }
 }
 
-// Returns all dishes based on their region
+// Returnerar all matobjekt baserat på dess region
 function getDishesByRegion(dishes, region) {
-    let dishesByregion = [];
+    let dishesByRegion = [];
 
     for (let food of dishes) {
         if (food.region.toLowerCase() == region.toLowerCase()) {
-            dishesByregion.push(food);
+            dishesByRegion.push(food);
         }
     }
 
-    return dishesByregion;
+    return dishesByRegion;
 }
 
-// Returns all dishes based on their country
+// Returnerar all matobjekt baserat på deras land
 function getDishesByCountry(dishes, country) {
-    let dishesBycountry = [];
+    let dishesByCountry = [];
 
     for (let food of dishes) {
         if (food.country == country) {
-            dishesBycountry.push(food);
+            dishesByCountry.push(food);
         }
     }
 
-    return dishesBycountry;
+    return dishesByCountry;
 }
 
-// Calculates the avercountry country of our dishes
-function getAvercountryfoodcountry(dishes) {
-    let sumOfcountrys = 0;
-
-    // For each food we increase `sumOfcountrys` with that food`s country
-    for (let food of dishes) {
-        sumOfcountrys = sumOfcountrys + food.country;
-    }
-
-    // Take the avercountry country (total / number of dishes) and then round it to the
-    // nearest number (otherwise we'd get lots of decimals)
-    return Math.round(sumOfcountrys / dishes.length);
-}
-
-// Renders a food object into a HTML element
+// Renderar ett matobjekt i ett HTML element
 function renderFood(food, id) {
     let div = document.createElement("div");
     div.classList.add("food");
@@ -93,23 +78,23 @@ function renderFood(food, id) {
     return div;
 }
 
-// Renders an array of dishes into HTML
+// Renderar en array av matobjekt i HTML
 function renderDishes(dishes) {
     let dishesElement = document.getElementById("dishes");
     dishesElement.innerHTML = "";
 
-    // Go through all dishes and insert their HTML
+    // Go through all dishes and insert their HTML Går igenom alla matobjekt och appendar ett HTML element med deras data 
     for (let i = 0; i < dishes.length; i++) {
         let foodElement = renderFood(dishes[i], i + 1);
         dishesElement.appendChild(foodElement);
     }
-    // Add remove-handlers for our dishes
+ 
     setRemoveFoodHandlers();
 }
 
-// When <form id="add-food"> is submitted
+// Ett HTML-form element submittar data, denna funktion får tillgång till form-data därav sparar vi de nya matobjektet till vår databas. 
 function onAddDishesSubmit(event) {
-    // Prevent the form from sending us to a new page
+
     event.preventDefault();
 
     let name = document.getElementById("name").value;
@@ -119,14 +104,12 @@ function onAddDishesSubmit(event) {
     let sides = document.getElementById("sides").value;
 
     if (name == "" || region == "" || country == "" || main == "" || sides == "" )  {
-        alert ("WTF are u retarded, fill in the fields");
-        console.log ("hej!")
+        alert ("You need to fill in the fields!");
+
         return;
     };
 
-    let food = createNewfood(name, region, country, main, sides);
-
-    // Calculate the newly created dishes ID
+    let food = createNewFood(name, region, country, main, sides);
    
     if (database.length <= 0) {
         food.id = 0;
@@ -135,37 +118,33 @@ function onAddDishesSubmit(event) {
         food.id = database[database.length - 1].id + 1;
     }
    
-
-
     addFoodToDatabase(database, food)
     renderDishes(database);
 
-    // Reset (empty) all form fields
+    // Här tömmer vi form-fields
     let form = document.getElementById("add-food");
     form.reset();
 }
 
-// Add "click" event handler to <button id="add">
+// Skapat en eventhandler 
 function setAddFoodHandler() {
     let form = document.getElementById("add-food");
     form.addEventListener("submit", onAddDishesSubmit);
 }
 
-// When a user clicks the remove-food-button
+// Denna funktionen får tillgång till "id" så att vi kan radera det valda matobjekt.
 function onRemoveFoodClick(event) {
     let button = event.target;
     let id = button.parentElement.id;
-    // Uses the global variable `database`
+    // Skapat en "Confirm alert" där användaren blir tillfrågad om en bekräftelse
     if (confirm ("Are you sure you want to remove this field?")){
         removeFoodById(database, id);
-        // Re-render (without the newly deleted food)
+        
         renderDishes(database);
     }
-
-
 }
 
-// Add "click" event handler to all remove-buttons
+// Skapat en remove-food eventhandler
 function setRemoveFoodHandlers() {
     let buttons = document.querySelectorAll(".food button");
 
@@ -174,45 +153,45 @@ function setRemoveFoodHandlers() {
     }
 }
 
-// Filter dishes by region
+// Filtrerar matobjektet baserat på dess region
 function onFilterByRegionSubmit(event) {
     event.preventDefault();
-    // What region?
+    // Region-värdet
     let region = document.getElementById("filter-region").value;
-    // Get the dishes by region
+    // Hämtar matobjektet baserat på dess region
     let dishes = getDishesByRegion(database, region);
-    // Re-render them
+    
     renderDishes(dishes);
 }
 
-// Filter dishes by country
-function onFilterBycountrySubmit(event) {
+// Filtrerar matobjekten baserat på dess land
+function onFilterByCountriesubmit(event) {
     event.preventDefault();
-    // What country?
+    // land-värdet
     let country = document.getElementById("filter-from").value;
-    // Get the dishes by region
+    // Hämtar matobjektet baserat på dess land
     let dishes = getDishesByCountry(database, country);
-    // Re-render them
+
     renderDishes(dishes);
 }
 
-function onShowAllClick() {
+function onDisplayAllClick() {
     document.getElementById("filter-region").value = "";
     document.getElementById("filter-from").value = "";
     renderDishes(database);
 }
 
-function setFilterfoodHandlers() {
+function setFilterFoodHandlers() {
     let regionForm = document.getElementById("filter-by-region");
     let countryForm = document.getElementById("filter-by-country");
-    let showAll = document.getElementById("display-all");
+    let displayAll = document.getElementById("display-all");
 
     regionForm.addEventListener("submit", onFilterByRegionSubmit);
-    countryForm.addEventListener("submit", onFilterBycountrySubmit);
-    showAll.addEventListener("click", onShowAllClick);
+    countryForm.addEventListener("submit", onFilterByCountriesubmit);
+    displayAll.addEventListener("click", onDisplayAllClick);
 }
 
-// Initialize the pcountry
+// initialiserar vår sida och dessutom fyller på med data
 renderDishes(database);
 setAddFoodHandler();
-setFilterfoodHandlers();
+setFilterFoodHandlers();

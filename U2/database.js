@@ -80,12 +80,5 @@ let database = [
         main: "Pasta",
         sides: "Bread"
     },
-    {
-        id: 10,
-        name: "Hasa Adas",
-        region: "North Africa",
-        country: "Libya",
-        main: "Lentiles",
-        sides: "Bread"
-    }
+   
 ];
